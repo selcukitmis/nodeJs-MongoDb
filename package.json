@@ -2,6 +2,7 @@
   "name": "TodoApp",
   "version": "1.0.0",
   "dependencies": {
-    "mongodb": "^2.2.31"
+    "mongodb": "^2.2.31",
+    "mongoose": "^4.11.13"
   }
 }
