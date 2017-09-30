@@ -2,8 +2,12 @@
   "name": "TodoApp",
   "version": "1.0.0",
   "scripts": {
+    "start": "node server/server.js",
     "test": "mocha server/**/*.test.js",
     "test-watch": "nodemon --exec 'npm test'"
+  },
+  "engines": {
+    "node":"8.5.0"
   },
   "dependencies": {
     "body-parser": "^1.18.2",
