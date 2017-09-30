@@ -1,8 +1,11 @@
 const { MongoClient, ObjectID } = require("mongodb").MongoClient;
 
-let mongoUrl = process.argv.MONGODB_URI
-  ? "mongodb://<dba>:<123123>@ds157624.mlab.com:57624/heroku_68nrvdz3"
-  : "mongodb://localhost:27017/TodoApp";
+let mongoUrl =
+  "mongodb://<dba>:<123123>@ds157624.mlab.com:57624/heroku_68nrvdz3";
+
+// let mongoUrl = process.argv.MONGODB_URI
+// ? "mongodb://<dba>:<123123>@ds157624.mlab.com:57624/heroku_68nrvdz3"
+// : "mongodb://localhost:27017/TodoApp";
 
 MongoClient.connect(mongoUrl, (err, db) => {
   if (err) {
