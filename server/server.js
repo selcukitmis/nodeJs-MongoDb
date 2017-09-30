@@ -4,7 +4,7 @@ if (env === "development") {
   process.env.MONGODB_URI = "mongodb://localhost:27017/TodoApp";
 } else if (env === "test") {
   process.env.PORT = 3000;
-  process.env.MONGODB_URI = "mongodb://localhost:27017/TodoAppTest";  
+  process.env.MONGODB_URI = "mongodb://localhost:27017/TodoAppTest";
 }
 let _ = require("lodash");
 let express = require("express");
@@ -18,6 +18,12 @@ let app = express();
 const port = process.env.PORT;
 
 app.use(bodyParser.json());
+
+api.get("/test", (req, res) => {
+  res.send({
+    type: process.env.MONGODB_URI
+  });
+});
 
 app.post("/todos", (req, res) => {
   var todo = new Todo({
