@@ -1,6 +1,6 @@
 let mongoose = require("mongoose");
 
-let mongoUrl = process.argv.MONGODB_URI || "mongodb://localhost:27017/TodoApp";
+let mongoUrl = process.env.MONGODB_URI;
 
 mongoose.Promise = global.Promise;
 
