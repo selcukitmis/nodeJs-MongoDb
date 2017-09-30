@@ -19,7 +19,7 @@ const port = process.env.PORT;
 
 app.use(bodyParser.json());
 
-api.get("/test", (req, res) => {
+app.get("/", (req, res) => {
   res.send({
     type: process.env.MONGODB_URI
   });
