@@ -15,6 +15,7 @@ describe("POST /todos", () => {
     request(app)
       .post("/todos")
       .send({ text })
+      .set("x-auth", users[0].tokens[0].token)
       .expect(200)
       .expect(res => {
         expect(res.body.text).toBe(text);
@@ -34,27 +35,32 @@ describe("POST /todos", () => {
   });
 
   it("invalid data ile kaydedilemezse çalışacak", done => {
-    request(app).post("/todos").send({}).expect(400).end((err, res) => {
-      if (err) return done(err);
+    request(app)
+      .post("/todos")
+      .set("x-auth", users[0].tokens[0].token)
+      .send({})
+      .expect(400)
+      .end((err, res) => {
+        if (err) return done(err);
 
-      Todo.find({})
-        .then(todos => {
-          expect(todos.length).toBe(3);
-          done();
-        })
-        .catch(err => {
-          done(err);
-        });
-    });
+        Todo.find({})
+          .then(todos => {
+            expect(todos.length).toBe(3);
+            done();
+          })
+          .catch(err => {
+            done(err);
+          });
+      });
   });
 
   it("hepsini getirmeli", done => {
     request(app)
       .get("/todos")
+      .set("x-auth", users[0].tokens[0].token)
       .expect(200)
       .expect(res => {
-        console.log(res.body);
-        expect(res.body.length).toBe(3);
+        expect(res.body.length).toBe(2);
       })
       .end(done);
   });
@@ -64,6 +70,7 @@ describe("GET todos/:id", () => {
   it("id ye göre todo getirmesi gerekir", done => {
     request(app)
       .get(`/todos/${todos[0]._id.toHexString()}`)
+      .set("x-auth", users[0].tokens[0].token)
       .expect(200)
       .expect(res => {
         expect(res.body.todo.text).toBe(todos[0].text);
@@ -76,6 +83,7 @@ describe("DELETE todos/:id", () => {
   it("id ye göre todo getirmesi gerekir", done => {
     request(app)
       .delete(`/todos/${todos[0]._id.toHexString()}`)
+      .set("x-auth", users[0].tokens[0].token)
       .expect(200)
       .expect(res => {
         expect(res.body.todo.text).toBe(todos[0].text);
@@ -92,6 +100,7 @@ describe("PATCH todos/:id", () => {
     request(app)
       .patch(`/todos/${hexId}`)
       .send({ text, completed: true })
+      .set("x-auth", users[0].tokens[0].token)
       .expect(200)
       .expect(res => {
         expect(res.body.todo.text).toBe(text);

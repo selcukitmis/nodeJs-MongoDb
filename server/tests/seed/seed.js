@@ -3,18 +3,24 @@ const { User } = require("./../../models/user");
 const { ObjectID } = require("mongodb");
 const jwt = require("jsonwebtoken");
 
+const userOneId = new ObjectID();
+const userTwoId = new ObjectID();
+
 const todos = [
   {
     _id: new ObjectID(),
-    text: "Todo 1"
+    text: "Todo 1",
+    _creator: userOneId
   },
   {
     _id: new ObjectID(),
-    text: "Todo 2"
+    text: "Todo 2",
+    _creator: userOneId
   },
   {
     _id: new ObjectID(),
-    text: "Todo 3"
+    text: "Todo 3",
+    _creator: userTwoId
   }
 ];
 
@@ -27,9 +33,6 @@ const populateTodos = done => {
       done();
     });
 };
-
-const userOneId = new ObjectID();
-const userTwoId = new ObjectID();
 
 const users = [
   {
