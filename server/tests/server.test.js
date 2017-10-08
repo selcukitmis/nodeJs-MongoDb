@@ -142,7 +142,7 @@ describe("POST /users", () => {
       .send({ email, password })
       .expect(200)
       .expect(response => {
-        //expect(response.headers["x-auth"]).toExist();
+        expect(response.headers["x-auth"]).toBeTruthy();
         expect(response.body.email).toBe(email);
       })
       .end(err => {
